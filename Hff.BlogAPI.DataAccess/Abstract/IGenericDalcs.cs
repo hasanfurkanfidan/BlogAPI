@@ -36,6 +36,8 @@ namespace Hff.BlogAPI.DataAccess.Abstract
         /// <returns></returns>
         Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> keySelector);
 
+        Task<TEntity> FindByIdAsync(int id);
+
         Task<TEntity> GetAsync(Expression<Func<TEntity,bool>>expression);
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);

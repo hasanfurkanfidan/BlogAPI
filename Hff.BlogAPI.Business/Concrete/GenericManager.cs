@@ -21,30 +21,17 @@ namespace Hff.BlogAPI.Business.Concrete
             await _genericDal.AddAsync(entity);
         }
 
+        public Task<TEntity> FindByIdAsync(int id)
+        {
+            return _genericDal.FindByIdAsync(id);
+        }
+
         public async Task<List<TEntity>> GetAllAsync()
         {
             return await _genericDal.GetAllAsync();
         }
 
-        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression)
-        {
-            return await _genericDal.GetAllAsync(expression);
-        }
-
-        public async Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, TKey>> keySelector)
-        {
-            return await _genericDal.GetAllAsync(expression, keySelector);
-        }
-
-        public async Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> keySelector)
-        {
-            return await _genericDal.GetAllAsync(keySelector);
-        }
-
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
-        {
-            return await _genericDal.GetAsync(expression);
-        }
+  
 
         public async Task Remove(TEntity entity)
         {
