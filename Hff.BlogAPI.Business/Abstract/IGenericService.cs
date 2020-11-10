@@ -17,6 +17,6 @@ namespace Hff.BlogAPI.Business.Abstract
         Task<TEntity> FindByIdAsync(int id);
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
-        Task Remove(TEntity entity);
+        Task RemoveAsync(TEntity entity);
     }
 }

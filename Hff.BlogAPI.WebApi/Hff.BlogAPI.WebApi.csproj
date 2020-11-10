@@ -4,5 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hff.BlogAPI.Business\Hff.BlogAPI.Business.csproj" />
+    <ProjectReference Include="..\Hff.BlogAPI.Dtos\Hff.BlogAPI.Dtos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
 
 </Project>

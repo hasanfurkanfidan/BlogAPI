@@ -33,7 +33,7 @@ namespace Hff.BlogAPI.Business.Concrete
 
   
 
-        public async Task Remove(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
            await _genericDal.RemoveAsync(entity);
         }
