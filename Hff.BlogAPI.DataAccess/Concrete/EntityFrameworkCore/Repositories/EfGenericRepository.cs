@@ -38,6 +38,22 @@ namespace Hff.BlogAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories
             }
         }
 
+        public async Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, TKey>> keySelector)
+        {
+            using (var context = new BlogContext())
+            {
+                return await context.Set<TEntity>().Where(expression).OrderByDescending(keySelector).ToListAsync();
+            }
+        }
+
+        public async Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> keySelector)
+        {
+            using (var context = new BlogContext())
+            {
+                return await context.Set<TEntity>().OrderByDescending(keySelector).ToListAsync();
+            }
+        }
+
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
         {
             using (var context = new BlogContext())
@@ -46,7 +62,7 @@ namespace Hff.BlogAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories
             }
         }
 
-        public async Task Remove(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
             using (var context = new BlogContext())
             {

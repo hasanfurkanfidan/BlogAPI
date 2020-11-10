@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hff.BlogAPI.DataAccess.Abstract
+namespace Hff.BlogAPI.Business.Abstract
 {
-   public interface IGenericDal<TEntity>where TEntity:class,IEntity,new()
+    public interface IGenericService<TEntity> where TEntity:class,IEntity,new()
     {
         /// <summary>
         /// Only GetAll
@@ -36,11 +36,9 @@ namespace Hff.BlogAPI.DataAccess.Abstract
         /// <returns></returns>
         Task<List<TEntity>> GetAllAsync<TKey>(Expression<Func<TEntity, TKey>> keySelector);
 
-        Task<TEntity> GetAsync(Expression<Func<TEntity,bool>>expression);
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression);
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
-        Task RemoveAsync(TEntity entity);
-         
+        Task Remove(TEntity entity);
     }
 }
- 

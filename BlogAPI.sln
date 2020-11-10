@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hff.BlogAPI.Entities", "Hff.BlogAPI.Entities\Hff.BlogAPI.Entities.csproj", "{CB5296AA-3535-43F6-9741-22B18A11D1AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hff.BlogAPI.Entities", "Hff.BlogAPI.Entities\Hff.BlogAPI.Entities.csproj", "{CB5296AA-3535-43F6-9741-22B18A11D1AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hff.BlogAPI.DataAccess", "Hff.BlogAPI.DataAccess\Hff.BlogAPI.DataAccess.csproj", "{C83001B5-3D3C-4F50-B685-309EF8C9EB81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hff.BlogAPI.DataAccess", "Hff.BlogAPI.DataAccess\Hff.BlogAPI.DataAccess.csproj", "{C83001B5-3D3C-4F50-B685-309EF8C9EB81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hff.BlogAPI.Business", "Hff.BlogAPI.Business\Hff.BlogAPI.Business.csproj", "{0D2B6F4C-F340-4C76-9421-78263CA7DB07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C83001B5-3D3C-4F50-B685-309EF8C9EB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C83001B5-3D3C-4F50-B685-309EF8C9EB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C83001B5-3D3C-4F50-B685-309EF8C9EB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D2B6F4C-F340-4C76-9421-78263CA7DB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D2B6F4C-F340-4C76-9421-78263CA7DB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D2B6F4C-F340-4C76-9421-78263CA7DB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D2B6F4C-F340-4C76-9421-78263CA7DB07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
