@@ -29,7 +29,10 @@ namespace Hff.BlogAPI.WebApi
         {
             CustomExtension.AddDependencies(services);
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opu=>
+            {
+                opu.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +40,7 @@ namespace Hff.BlogAPI.WebApi
         {
             if (env.IsDevelopment())
             {
+                app.UseStaticFiles();
                 app.UseDeveloperExceptionPage();
             }
 
