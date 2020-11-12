@@ -12,5 +12,7 @@ namespace Hff.BlogAPI.Business.Abstract
         Task<List<Blog>> GetAllSortedByPostedTime();
         Task AddToCategoryAsync(CategoryBlogDto categoryBlogDto);
         Task RemoveFromCategoryAsync(CategoryBlogDto categoryBlogDto);
+        Task<List<Blog>> GetAllWithCategoryId(int id);
+
     }
 }

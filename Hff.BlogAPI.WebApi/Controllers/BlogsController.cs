@@ -43,7 +43,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return Ok(_mapper.Map<BlogListDto>(await _blogService.FindByIdAsync(id)));
         }
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [ValidModel]
         public async Task<IActionResult> Create([FromForm] BlogAddModel model)
         {
@@ -54,7 +54,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
                 return Created("", model);
 
             }
-            else if(uploadModel.UploadState == Enums.UploadState.Success)
+            else if (uploadModel.UploadState == Enums.UploadState.Success)
             {
                 model.ImagePath = uploadModel.NewName;
                 await _blogService.AddAsync(_mapper.Map<Blog>(model));
@@ -65,21 +65,21 @@ namespace Hff.BlogAPI.WebApi.Controllers
             {
                 return BadRequest(uploadModel.ErrorMessage);
             }
-           
+
         }
         [HttpPut("{id}")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [ValidModel]
         [ServiceFilter(typeof(ValidId<Blog>))]
 
         public async Task<IActionResult> Update(int id, [FromForm] BlogUpdateModel model)
         {
-            var blog =await _blogService.FindByIdAsync(id);
+            var blog = await _blogService.FindByIdAsync(id);
             if (id != model.Id)
             {
                 return BadRequest("Geçersiz id");
             }
-            var uploadModel =await baseController.UploadFile(model.Image, "image/jpeg");
+            var uploadModel = await baseController.UploadFile(model.Image, "image/jpeg");
             if (uploadModel.UploadState == UploadState.Success)
             {
                 model.ImagePath = uploadModel.NewName;
@@ -87,7 +87,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
                 return NoContent();
 
             }
-            else if(uploadModel.UploadState == UploadState.NotExist)
+            else if (uploadModel.UploadState == UploadState.NotExist)
             {
                 model.ImagePath = blog.ImagePath;
                 await _blogService.UpdateAsync(_mapper.Map<Blog>(model));
@@ -100,7 +100,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [ServiceFilter(typeof(ValidId<Blog>))]
         public async Task<IActionResult> Delete(int id)
         {
@@ -110,19 +110,24 @@ namespace Hff.BlogAPI.WebApi.Controllers
 
         }
         [HttpPost("[action]")]
-        [Authorize(Roles ="Admin")]
-        public async Task<IActionResult>AddToCategory(CategoryBlogDto model)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddToCategory(CategoryBlogDto model)
         {
             await _blogService.AddToCategoryAsync(model);
             return Created("", model);
         }
         [HttpDelete("[action]")]
-        public async Task<IActionResult>RemoveFromCategory(CategoryBlogDto model)
+        public async Task<IActionResult> RemoveFromCategory(CategoryBlogDto model)
         {
             await _blogService.RemoveFromCategoryAsync(model);
             return NoContent();
         }
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetAllWithCategoryId(int id)
+        {
 
+            return Ok(_mapper.Map<List<BlogListDto>>(await _blogService.GetAllWithCategoryId(id)));
+        }
 
 
 

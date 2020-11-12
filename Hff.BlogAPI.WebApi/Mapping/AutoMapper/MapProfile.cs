@@ -17,6 +17,7 @@ namespace Hff.BlogAPI.WebApi.Mapping.AutoMapper
             CreateMap<BlogListDto, Blog>();
             CreateMap<Blog, BlogListDto>();
 
+
             CreateMap<BlogUpdateModel, Blog>();
             CreateMap<Blog, BlogUpdateModel>();
 
