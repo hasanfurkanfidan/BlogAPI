@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Hff.BlogAPI.Business.Abstract;
 using Hff.BlogAPI.Business.Utilities.JwtTool;
 using Hff.BlogAPI.Dtos.Dtos.AppUserDtos;
+using Hff.BlogAPI.WebApi.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
         }
 
         [HttpPost]
+        [ValidModel]
         public async Task<IActionResult>SignIn(AppUserLoginDto appUserLoginDto)
         {
             var user =await _appUserService.CheckUserAsync(appUserLoginDto);
@@ -33,7 +35,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             }
             return BadRequest("Kullanıcı adı veya şifre hatalı");
         }
-        [HttpGet("{action}")]
+        [HttpGet("[action]")]
         [Authorize(Roles ="Admin")]
         public async Task<IActionResult> ActiveUser()
         {

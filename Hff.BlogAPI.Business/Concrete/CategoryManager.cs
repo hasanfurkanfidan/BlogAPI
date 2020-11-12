@@ -12,14 +12,21 @@ namespace Hff.BlogAPI.Business.Concrete
     public class CategoryManager:GenericManager<Category>,ICategoryService
     {
         private readonly IGenericDal<Category> _genericDal;
-        public CategoryManager(IGenericDal<Category>genericDal):base(genericDal)
+        private readonly ICategoryDal _categoryDal;
+        public CategoryManager(IGenericDal<Category>genericDal,ICategoryDal categoryDal):base(genericDal)
         {
             _genericDal = genericDal;
+            _categoryDal = categoryDal;
         }
 
-        public Task<List<Category>> GetAllSortedByCategory()
+        public async Task<List<Category>> GetAllSortedByCategory()
         {
-            return _genericDal.GetAllAsync(p => p.Id);
+            return await _genericDal.GetAllAsync(p => p.Id);
+        }
+
+        public async Task<List<Category>> GetAllWithCategoryBlogsAsync()
+        {
+            return await _categoryDal.GetAllWithCategoryBlogsAsync();
         }
     }
 }

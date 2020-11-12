@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Hff.BlogAPI.Business.IOC.Microsoft;
 using Hff.BlogAPI.Business.StringInfos;
+using Hff.BlogAPI.WebApi.CustomFilters;
 using Hff.BlogAPI.WebApi.Mapping.AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace Hff.BlogAPI.WebApi
         {
             CustomExtension.AddDependencies(services);
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped(typeof(ValidId<>));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt=> {
                 opt.RequireHttpsMetadata = false;
                 opt.TokenValidationParameters = new TokenValidationParameters

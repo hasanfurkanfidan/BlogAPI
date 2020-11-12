@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Hff.BlogAPI.Business.Abstract;
 using Hff.BlogAPI.Dtos.Dtos.BlogDtos;
+using Hff.BlogAPI.Dtos.Dtos.CategoryBlogDtos;
+using Hff.BlogAPI.Dtos.Dtos.CategoryDtos;
 using Hff.BlogAPI.Entities.Concrete;
+using Hff.BlogAPI.WebApi.CustomFilters;
 using Hff.BlogAPI.WebApi.Enums;
 using Hff.BlogAPI.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -34,12 +37,14 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return Ok(_mapper.Map<List<BlogListDto>>(await _blogService.GetAllSortedByPostedTime()));
         }
         [HttpGet("{id}")]
+        [ServiceFilter(typeof(ValidId<Blog>))]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(_mapper.Map<BlogListDto>(await _blogService.FindByIdAsync(id)));
         }
         [HttpPost]
         [Authorize(Roles ="Admin")]
+        [ValidModel]
         public async Task<IActionResult> Create([FromForm] BlogAddModel model)
         {
             var uploadModel = await baseController.UploadFile(model.Image, "image/jpeg");
@@ -64,6 +69,9 @@ namespace Hff.BlogAPI.WebApi.Controllers
         }
         [HttpPut("{id}")]
         [Authorize(Roles ="Admin")]
+        [ValidModel]
+        [ServiceFilter(typeof(ValidId<Blog>))]
+
         public async Task<IActionResult> Update(int id, [FromForm] BlogUpdateModel model)
         {
             var blog =await _blogService.FindByIdAsync(id);
@@ -93,6 +101,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
         }
         [HttpDelete("{id}")]
         [Authorize(Roles ="Admin")]
+        [ServiceFilter(typeof(ValidId<Blog>))]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -100,6 +109,21 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return NoContent();
 
         }
+        [HttpPost("[action]")]
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult>AddToCategory(CategoryBlogDto model)
+        {
+            await _blogService.AddToCategoryAsync(model);
+            return Created("", model);
+        }
+        [HttpDelete("[action]")]
+        public async Task<IActionResult>RemoveFromCategory(CategoryBlogDto model)
+        {
+            await _blogService.RemoveFromCategoryAsync(model);
+            return NoContent();
+        }
+
+
 
 
 

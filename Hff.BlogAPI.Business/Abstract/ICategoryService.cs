@@ -9,5 +9,7 @@ namespace Hff.BlogAPI.Business.Abstract
     public interface ICategoryService:IGenericService<Category>
     {
         Task<List<Category>> GetAllSortedByCategory();
+        Task<List<Category>> GetAllWithCategoryBlogsAsync();
+
     }
 }
