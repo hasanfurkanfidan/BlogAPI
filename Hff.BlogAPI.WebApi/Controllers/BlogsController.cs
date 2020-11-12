@@ -9,6 +9,7 @@ using Hff.BlogAPI.Dtos.Dtos.BlogDtos;
 using Hff.BlogAPI.Entities.Concrete;
 using Hff.BlogAPI.WebApi.Enums;
 using Hff.BlogAPI.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,11 +34,12 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return Ok(_mapper.Map<List<BlogListDto>>(await _blogService.GetAllSortedByPostedTime()));
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBtId(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             return Ok(_mapper.Map<BlogListDto>(await _blogService.FindByIdAsync(id)));
         }
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Create([FromForm] BlogAddModel model)
         {
             var uploadModel = await baseController.UploadFile(model.Image, "image/jpeg");
@@ -61,6 +63,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
            
         }
         [HttpPut("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Update(int id, [FromForm] BlogUpdateModel model)
         {
             var blog =await _blogService.FindByIdAsync(id);
@@ -89,6 +92,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Delete(int id)
         {
 

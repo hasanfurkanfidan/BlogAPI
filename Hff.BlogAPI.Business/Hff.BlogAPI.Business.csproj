@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hff.BlogAPI.DataAccess\Hff.BlogAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\Hff.BlogAPI.Dtos\Hff.BlogAPI.Dtos.csproj" />
     <ProjectReference Include="..\Hff.BlogAPI.Entities\Hff.BlogAPI.Entities.csproj" />
   </ItemGroup>
 

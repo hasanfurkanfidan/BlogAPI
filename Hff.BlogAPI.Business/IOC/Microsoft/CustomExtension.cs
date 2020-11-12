@@ -1,5 +1,6 @@
 ﻿using Hff.BlogAPI.Business.Abstract;
 using Hff.BlogAPI.Business.Concrete;
+using Hff.BlogAPI.Business.Utilities.JwtTool;
 using Hff.BlogAPI.DataAccess.Abstract;
 using Hff.BlogAPI.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Hff.BlogAPI.Business.IOC.Microsoft
             services.AddScoped(typeof(IGenericService<>), typeof(GenericManager<>));
             services.AddScoped<IAppUserService, AppUserManager>();
             services.AddScoped<IAppUserDal, EfAppUserRepository>();
+            services.AddScoped<IJwtService, JwtManager>();
             services.AddScoped<IBlogService, BlogManager>();
             services.AddScoped<IBlogDal, EfBlogRepository>();
             services.AddScoped<ICategoryService, CategoryManager>();

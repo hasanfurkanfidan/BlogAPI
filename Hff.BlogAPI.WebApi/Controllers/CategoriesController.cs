@@ -6,6 +6,7 @@ using AutoMapper;
 using Hff.BlogAPI.Business.Abstract;
 using Hff.BlogAPI.Dtos.Dtos.CategoryDtos;
 using Hff.BlogAPI.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,12 +34,14 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return Ok(mapper.Map<CategoryListDto>(await categoryService.FindByIdAsync(id)));
         }
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Create(CategoryAddDto model)
         {
             await categoryService.AddAsync(mapper.Map<Category>(model));
             return Created("", model);
         }
         [HttpPut("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Update(int id, CategoryUpdateDto model)
         {
             if (id != model.Id)
@@ -49,6 +52,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult>Delete(int id)
         {
             var blog = await categoryService.FindByIdAsync(id);
