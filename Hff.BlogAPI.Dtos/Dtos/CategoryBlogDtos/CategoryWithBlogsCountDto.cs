@@ -9,6 +9,7 @@ namespace Hff.BlogAPI.Dtos.Dtos.CategoryBlogDtos
    public class CategoryWithBlogsCountDto:IDto
     {
         public int BlogsCount { get; set; }
-        public Category Category { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

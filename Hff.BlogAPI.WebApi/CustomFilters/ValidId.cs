@@ -18,7 +18,7 @@ namespace Hff.BlogAPI.WebApi.CustomFilters
         }
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnActionExecuting(ActionExecutingContext context)

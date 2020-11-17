@@ -16,7 +16,7 @@ namespace Hff.BlogAPI.Business.Utilities.JwtTool
             SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtInfo.SecurityKey));
             SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey,SecurityAlgorithms.HmacSha256);
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(issuer:JwtInfo.Issuer,audience:JwtInfo.Audience,claims:SetClaims(appUser),DateTime.Now,DateTime.Now.AddMinutes(JwtInfo.Minute),signingCredentials:signingCredentials);
+            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(issuer:JwtInfo.Issuer,audience:JwtInfo.Audience,claims:SetClaims(appUser),notBefore:DateTime.Now,expires:DateTime.Now.AddMinutes(JwtInfo.Minute),signingCredentials:signingCredentials);
             JwtToken jwtToken = new JwtToken();
             jwtToken.Token =  handler.WriteToken(jwtSecurityToken);
             return jwtToken;
@@ -26,7 +26,6 @@ namespace Hff.BlogAPI.Business.Utilities.JwtTool
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, appUser.UserName));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, appUser.Id.ToString()));
-            claims.Add(new Claim(ClaimTypes.Role, "Admin"));
             return claims;
         }
     }

@@ -24,7 +24,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             _jwtService = jwtService;
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ValidModel]
         public async Task<IActionResult>SignIn(AppUserLoginDto appUserLoginDto)
         {
@@ -36,7 +36,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return BadRequest("Kullanıcı adı veya şifre hatalı");
         }
         [HttpGet("[action]")]
-        [Authorize(Roles ="Admin")]
+       
         public async Task<IActionResult> ActiveUser()
         {
             var userName = User.Identity.Name;

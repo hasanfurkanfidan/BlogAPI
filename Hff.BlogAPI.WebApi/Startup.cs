@@ -36,21 +36,27 @@ namespace Hff.BlogAPI.WebApi
             CustomExtension.AddDependencies(services);
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped(typeof(ValidId<>));
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt=> {
+           
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
                 opt.RequireHttpsMetadata = false;
+                
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidIssuer = JwtInfo.Issuer,
+                    NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
                     ValidAudience = JwtInfo.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtInfo.SecurityKey)),
                     ValidateLifetime = true,
                     ValidateAudience = true,
                     ValidateIssuer = true,
                     ClockSkew = TimeSpan.Zero,
+
                 };
 
             });
-            services.AddControllers().AddNewtonsoftJson(opu=>
+
+            services.AddControllers().AddNewtonsoftJson(opu =>
             {
                 opu.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
@@ -68,7 +74,7 @@ namespace Hff.BlogAPI.WebApi
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

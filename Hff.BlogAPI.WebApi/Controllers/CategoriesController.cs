@@ -77,7 +77,9 @@ namespace Hff.BlogAPI.WebApi.Controllers
             foreach (var item in categories)
             {
                 var model = new CategoryWithBlogsCountDto();
-                model.Category = item;
+                model.Name = item.Name;
+
+                model.Id = item.Id;
                 model.BlogsCount = item.CategoryBlogs.Count();
                 models.Add(model);
             }
