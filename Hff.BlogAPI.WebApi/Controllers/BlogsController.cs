@@ -43,7 +43,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return Ok(_mapper.Map<BlogListDto>(await _blogService.FindByIdAsync(id)));
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [ValidModel]
         public async Task<IActionResult> Create([FromForm] BlogAddModel model)
         {
@@ -68,7 +68,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
 
         }
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [ValidModel]
         [ServiceFilter(typeof(ValidId<Blog>))]
 
@@ -100,14 +100,12 @@ namespace Hff.BlogAPI.WebApi.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [ServiceFilter(typeof(ValidId<Blog>))]
         public async Task<IActionResult> Delete(int id)
         {
-
             await _blogService.RemoveAsync(await _blogService.FindByIdAsync(id));
             return NoContent();
-
         }
         [HttpPost("[action]")]
         [Authorize(Roles = "Admin")]

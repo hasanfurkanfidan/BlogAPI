@@ -43,6 +43,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
             var user =await _appUserService.FindByUserNameAsync(userName);
             var model = new AppUserDto
             {
+                Id = user.Id,
                 Name = user.Name,
                 Surname = user.Surname
             };

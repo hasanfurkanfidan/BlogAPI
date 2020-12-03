@@ -38,9 +38,9 @@ namespace Hff.BlogAPI.WebApi.Controllers
             return Ok(mapper.Map<CategoryListDto>(await categoryService.FindByIdAsync(id)));
         }
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         [ValidModel]
-        public async Task<IActionResult> Create(CategoryAddDto model)
+        public async Task<IActionResult> Create([FromForm] CategoryAddDto model)
         {
             await categoryService.AddAsync(mapper.Map<Category>(model));
             return Created("", model);
@@ -50,7 +50,7 @@ namespace Hff.BlogAPI.WebApi.Controllers
         [ValidModel]
         [ServiceFilter(typeof(ValidId<Category>))]
 
-        public async Task<IActionResult> Update(int id, CategoryUpdateDto model)
+        public async Task<IActionResult> Update(int id,[FromForm] CategoryUpdateDto model)
         {
             if (id != model.Id)
             {
